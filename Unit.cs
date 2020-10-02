@@ -13,5 +13,10 @@ namespace HRIS_KIT506
         public string Title { get; set; }
         public string Code { get; set; }
         public List<Class> ClassList { get; set; }
+        
+        public override string ToString()
+        {
+            return Code + " - " + Title;
+        }
     }
 }
