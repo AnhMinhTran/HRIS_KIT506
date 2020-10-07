@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using System.Data.Linq;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows; //for generating a MessageBox upon encountering an error
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
+using HRIS_KIT506.Teaching;
 using MySql.Data.MySqlClient;
 using MySql.Data.Types;
 
 
-namespace HRIS_KIT506
+namespace HRIS_KIT506.Database
 {
     abstract class DbAdapter
     {
@@ -57,12 +61,13 @@ namespace HRIS_KIT506
 
                 MySqlCommand cmd = new MySqlCommand
                     (
-                    "select id, title, given_name, family_name, campus, phone, room, email, category from staff", conn
+                    "select id, title, given_name, family_name, campus, phone, room, email, category, photo from staff", conn
                     );
                 rdr = cmd.ExecuteReader();
-
                 while (rdr.Read())
                 {
+                    byte[] bruh = Encoding.ASCII.GetBytes(rdr.GetString(9));
+
                     staff.Add(new Staff
                     {
                         ID = rdr.GetInt32(0),
@@ -72,8 +77,8 @@ namespace HRIS_KIT506
                         Phone = rdr.GetString(5),
                         Room = rdr.GetString(6),
                         Email = rdr.GetString(7),
-                        Category = ParseEnum<Category>(rdr.GetString(8))
-                    });
+                        Category = ParseEnum<Category>(rdr.GetString(8)),
+                    }) ;
                 }
             }
             catch (MySqlException e)
@@ -253,7 +258,7 @@ namespace HRIS_KIT506
                         Day = ParseEnum<DayOfWeek>(rdr.GetString(0)),
                         Start = rdr.GetTimeSpan(1),
                         End = rdr.GetTimeSpan(2),
-                        Type = ParseEnum<Type>(rdr.GetString(3)),
+                        Type = ParseEnum<Teaching.Type>(rdr.GetString(3)),
                         Room = rdr.GetString(4),
                         Campus = ParseEnum<Campus>(rdr.GetString(5)),
                         StaffID = rdr.GetInt32(6)

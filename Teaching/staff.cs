@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
-namespace HRIS_KIT506
+namespace HRIS_KIT506.Teaching
 {
-    public enum Category { Academic, Casual, Admin, Technical};
+    public enum Category { Academic, Casual, Admin, Technical, All};
     public enum Campus { Launceston, Hobart};
     public class Staff
     {

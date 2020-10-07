@@ -5,16 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HRIS_KIT506"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="522" Width="800">
     <TabControl Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="5">
         <TabItem Header="Staff">
             <WrapPanel Margin="0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="633">
-                <ListBox x:Name="sampleListBox" Margin="10" SelectionChanged="sampleListBox_SelectionChanged"
-			        ItemsSource="{Binding Source={StaticResource StaffList}}" Width="145"/>
-                <StackPanel x:Name="staffDetailsPanel" Orientation="Vertical" Grid.Column="1" Margin="10" Width="430">
-                    <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
+                <WrapPanel Margin="0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" Height="450">
+                    <Label Content="Filter by category" Margin="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
+                    <ComboBox VerticalAlignment="Top" Width="150" Margin="10" ItemsSource="{Binding Source={StaticResource CategoryValue}}" SelectionChanged="ComboBox_SelectionChanged"/>
+                    <ListBox x:Name="sampleListBox" Margin="10" SelectionChanged="sampleListBox_SelectionChanged"
+			        ItemsSource="{Binding Source={StaticResource StaffList}}" Width="147" Height="372"/>
+                </WrapPanel>
+
+                <StackPanel x:Name="staffDetailsPanel" Orientation="Vertical" Grid.Column="1" Margin="10" Width="315">
+                    <StackPanel Orientation="Horizontal" Margin="0,10,10,0">
                         <Label Content="ID:"></Label>
                         <Label Content="{Binding Path= ID }"></Label>
+
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
                         <Label Content="Name:"></Label>
@@ -48,6 +54,9 @@
                     <ListBox Height="95" ItemsSource="{Binding Path=Class}" 
                                  Margin="0,0,10,0"
                         />
+                </StackPanel>
+                <StackPanel x:Name="Picture" Width="132" Margin="490,-700,0,0" Height="150" >
+                    <Label Content="sadjfasdjfh" HorizontalAlignment="Right" Width="122"/>
                 </StackPanel>
             </WrapPanel>
         </TabItem>

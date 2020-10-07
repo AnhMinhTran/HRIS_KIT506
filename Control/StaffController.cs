@@ -1,18 +1,18 @@
-﻿using System;
+﻿using HRIS_KIT506.Database;
+using HRIS_KIT506.Teaching;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HRIS_KIT506
+namespace HRIS_KIT506.Control
 {
 
     class StaffController
     {
-        //The example shown here follows the pattern discussed in the Module 7 summary slides,
-        //maintaining two collections, a master and a 'viewable' one (which is the 'view model'
-        //in Microsoft's Model-View-ViewModel approach to Model-View-Controller)
+
         private List<Staff> Staff;
         public List<Staff> Workers { get { return Staff; } set { } }
 
@@ -33,5 +33,6 @@ namespace HRIS_KIT506
         {
             return VisibleWorkers;
         }
+
     }
 }

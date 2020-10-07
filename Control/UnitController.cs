@@ -1,11 +1,13 @@
-﻿using System;
+﻿using HRIS_KIT506.Database;
+using HRIS_KIT506.Teaching;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HRIS_KIT506
+namespace HRIS_KIT506.Control
 {
     class UnitController
     {

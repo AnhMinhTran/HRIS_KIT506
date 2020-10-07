@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HRIS_KIT506
+namespace HRIS_KIT506.Teaching
 {
     class Unit
     {
