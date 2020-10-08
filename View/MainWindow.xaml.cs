@@ -1,4 +1,6 @@
-﻿using System;
+﻿using HRIS_KIT506.Control;
+using HRIS_KIT506.Teaching;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

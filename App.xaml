@@ -5,7 +5,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <local:StaffController x:Key="staffcontroller" />
+        <local:Control.StaffController x:Key="staffcontroller" />
         <ObjectDataProvider x:Key="StaffList"
                             ObjectInstance="{StaticResource staffcontroller}"
                             MethodName="GetViewableList">
@@ -19,7 +19,7 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
 
-        <local:UnitController x:Key="unitcontroller"/>
+        <local:Control.UnitController x:Key="unitcontroller"/>
         <ObjectDataProvider x:Key="UnitList"
                             ObjectInstance="{StaticResource unitcontroller}"
                             MethodName="GetViewableList">

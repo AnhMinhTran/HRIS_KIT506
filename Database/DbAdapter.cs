@@ -66,7 +66,6 @@ namespace HRIS_KIT506.Database
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
-                    byte[] bruh = Encoding.ASCII.GetBytes(rdr.GetString(9));
 
                     staff.Add(new Staff
                     {
