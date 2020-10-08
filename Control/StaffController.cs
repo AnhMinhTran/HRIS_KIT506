@@ -34,5 +34,14 @@ namespace HRIS_KIT506.Control
             return VisibleWorkers;
         }
 
+        public void Filter(Category category)
+        {
+            var selected = from Staff e in Staff
+                           where category == Category.All || e.Category == category
+                           select e;
+            ViewableStaff.Clear();
+            //Converts the result of the LINQ expression to a List and then calls viewableStaff.Add with each element of that list in turn
+            selected.ToList().ForEach(ViewableStaff.Add);
+        }
     }
 }

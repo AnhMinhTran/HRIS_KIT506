@@ -24,13 +24,13 @@ namespace HRIS_KIT506
     {
         private const string STAFF_LIST_KEY = "StaffList";
         private const string UNIT_LIST_KEY = "UnitList";
-        private StaffController StaffController;
-        private UnitController UnitController;
+        private Control.StaffController StaffController;
+        private Control.UnitController UnitController;
         public MainWindow()
         {
             InitializeComponent();
-            StaffController = (StaffController)(Application.Current.FindResource(STAFF_LIST_KEY) as ObjectDataProvider).ObjectInstance;
-            UnitController = (UnitController)(Application.Current.FindResource(UNIT_LIST_KEY) as ObjectDataProvider).ObjectInstance;
+            StaffController = (Control.StaffController)(Application.Current.FindResource(STAFF_LIST_KEY) as ObjectDataProvider).ObjectInstance;
+            UnitController = (Control.UnitController)(Application.Current.FindResource(UNIT_LIST_KEY) as ObjectDataProvider).ObjectInstance;
         }
 
         private void unitListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -55,17 +55,10 @@ namespace HRIS_KIT506
         {
             if (e.RemovedItems.Count >0)
             {
-              
                 MessageBox.Show("Dropdown selected " + e.AddedItems[0]);
                 var selected = e.AddedItems[0].ToString();
-                foreach (Staff staff in StaffController.Workers)
-                {
-                    if (staff.Category.ToString().Equals(selected))
-                    {
-                        sampleListBox.Items.Add(staff);
-                    }
-                }
 
+                StaffController.Filter(selected);
             }
         }
     }

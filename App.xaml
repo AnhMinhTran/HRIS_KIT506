@@ -1,25 +1,28 @@
 ﻿<Application x:Class="HRIS_KIT506.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:HRIS_KIT506"
+             xmlns:Control="clr-namespace:HRIS_KIT506.Control"
+             xmlns:Teaching="clr-namespace:HRIS_KIT506.Teaching"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <local:Control.StaffController x:Key="staffcontroller" />
+        
+        <Control:StaffController x:Key="staffcontroller" />
         <ObjectDataProvider x:Key="StaffList"
                             ObjectInstance="{StaticResource staffcontroller}"
                             MethodName="GetViewableList">
             
         </ObjectDataProvider>
+        
         <ObjectDataProvider x:Key="CategoryValue"
                             ObjectType="{x:Type sys:Enum}"
                             MethodName="GetValues">
             <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="local:Category"/>
+                <x:Type TypeName="Teaching:Category"/>
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
 
-        <local:Control.UnitController x:Key="unitcontroller"/>
+        <Control:UnitController x:Key="unitcontroller"/>
         <ObjectDataProvider x:Key="UnitList"
                             ObjectInstance="{StaticResource unitcontroller}"
                             MethodName="GetViewableList">
