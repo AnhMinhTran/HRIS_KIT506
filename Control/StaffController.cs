@@ -43,5 +43,16 @@ namespace HRIS_KIT506.Control
             //Converts the result of the LINQ expression to a List and then calls viewableStaff.Add with each element of that list in turn
             selected.ToList().ForEach(ViewableStaff.Add);
         }
+
+        public void Search(string search)
+        {
+            var name = from Staff e in Staff
+                       where search == "" || e.Name.ToLower().Contains(search.ToLower())
+                       select e;
+
+            ViewableStaff.Clear();
+            name.ToList().ForEach(ViewableStaff.Add);
+        }
+
     }
 }

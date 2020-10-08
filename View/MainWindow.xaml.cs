@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HRIS_KIT506.Control;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,24 +40,30 @@ namespace HRIS_KIT506
             }
         }
 
-        private void sampleListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void StaffListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count > 0)
             {
-               
-                staffDetailsPanel.DataContext = e.AddedItems[0];
+                StaffDetailsPanel.DataContext = e.AddedItems[0];
             }
         }
 
-
-        private void staffComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void NameSearch_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.RemovedItems.Count >0)
+            if (e.Key == Key.Enter)
+            {
+                var search = NameSearch.Text.ToString();
+                StaffController.Search(search);
+            }
+        }
+
+        private void StaffComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
             {
                 var selected = e.AddedItems[0].ToString();
                 StaffController.Filter(selected);
             }
         }
-
     }
 }
