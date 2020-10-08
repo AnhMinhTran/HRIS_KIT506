@@ -25,7 +25,7 @@
         <Control:UnitController x:Key="unitcontroller"/>
         <ObjectDataProvider x:Key="UnitList"
                             ObjectInstance="{StaticResource unitcontroller}"
-                            MethodName="GetViewableList">
+                          MethodName="GetViewableList">
         </ObjectDataProvider>
 
     </Application.Resources>
