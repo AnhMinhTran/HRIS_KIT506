@@ -48,16 +48,15 @@ namespace HRIS_KIT506
             }
         }
 
-        public string SelectedCategory { get => SelectedCategory; set => SelectedCategory = value; }
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private void staffComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.RemovedItems.Count >0)
             {
-                MessageBox.Show("Dropdown selected " + e.AddedItems[0]);
                 var selected = e.AddedItems[0].ToString();
-
                 StaffController.Filter(selected);
             }
         }
+
     }
 }

@@ -11,9 +11,12 @@
             <WrapPanel Margin="0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="633">
                 <WrapPanel Margin="0" HorizontalAlignment="Right" VerticalAlignment="Top" Width="200" Height="450">
                     <Label Content="Filter by category" Margin="10,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Center"/>
-                    <ComboBox VerticalAlignment="Top" Width="150" Margin="10" ItemsSource="{Binding Source={StaticResource CategoryValue}}" SelectionChanged="ComboBox_SelectionChanged"/>
-                    <ListBox x:Name="sampleListBox" Margin="10" SelectionChanged="sampleListBox_SelectionChanged"
-			        ItemsSource="{Binding Source={StaticResource StaffList}}" Width="147" Height="372"/>
+                    <ComboBox x:Name="staffComboBox" VerticalAlignment="Top" Width="150" Margin="10" 
+                        ItemsSource="{Binding Source={StaticResource CategoryValue}}" 
+                        SelectionChanged="staffComboBox_SelectionChanged"/>
+                    <ListBox x:Name="sampleListBox" Margin="10" 
+			            ItemsSource="{Binding Source={StaticResource StaffList}}" Width="147" Height="372"
+                        SelectionChanged="sampleListBox_SelectionChanged"/>
                 </WrapPanel>
 
                 <StackPanel x:Name="staffDetailsPanel" Orientation="Vertical" Grid.Column="1" Margin="10" Width="315">
@@ -43,7 +46,7 @@
                         <Label Content="{Binding Path=Email}"></Label>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
-                        <Label Content="Categiry:"></Label>
+                        <Label Content="Category:"></Label>
                         <Label Content="{Binding Path=Category}"></Label>
                     </StackPanel>
                     <Label Content="Consultation hours:" Margin="0,0,10,0"></Label>
