@@ -32,14 +32,6 @@ namespace HRIS_KIT506
             UnitController = (Control.UnitController)(Application.Current.FindResource(UNIT_LIST_KEY) as ObjectDataProvider).ObjectInstance;
         }
 
-        private void unitListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.AddedItems.Count > 0)
-            {
-                unitDetailsPanel.DataContext = e.AddedItems[0];
-            }
-        }
-
         private void StaffListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (e.AddedItems.Count > 0)
@@ -63,6 +55,25 @@ namespace HRIS_KIT506
             {
                 var selected = e.AddedItems[0].ToString();
                 StaffController.Filter(selected);
+            }
+        }
+
+        private void TeachingListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                //var code = e.AddedItems[0].ToString();
+                TabControl.SelectedIndex = 1;
+
+                
+
+            }
+        }
+        private void unitListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.AddedItems.Count > 0)
+            {
+                unitDetailsPanel.DataContext = e.AddedItems[0];
             }
         }
     }

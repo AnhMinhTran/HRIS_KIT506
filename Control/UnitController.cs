@@ -32,5 +32,18 @@ namespace HRIS_KIT506.Control
         {
             return VisibleCourses;
         }
+
+        public void Filter(string code)
+        {
+            var selected = from Unit e in Unit
+                           where e.Code.ToString() == code
+                           select e;
+
+            ViewableUnit.Clear();
+            //Converts the result of the LINQ expression to a List and then calls viewableStaff.Add with each element of that list in turn
+            selected.ToList().ForEach(ViewableUnit.Add);
+        }
+
+
     }
 }
