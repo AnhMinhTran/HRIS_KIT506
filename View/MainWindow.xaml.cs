@@ -1,4 +1,5 @@
 ﻿using HRIS_KIT506.Control;
+using HRIS_KIT506.View;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -75,6 +76,12 @@ namespace HRIS_KIT506
             {
                 unitDetailsPanel.DataContext = e.AddedItems[0];
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ActivityGrid activityGrid = new ActivityGrid();
+            activityGrid.Show();
         }
     }
 }

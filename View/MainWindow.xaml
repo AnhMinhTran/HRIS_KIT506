@@ -68,6 +68,9 @@
                                     <Label Content="Category:"></Label>
                                     <Label Content="{Binding Path=Category}"></Label>
                                 </StackPanel>
+                                <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
+                                    <Button Click="Button_Click">Activity Grid</Button>
+                                </StackPanel>
                             </StackPanel>
 
                             <StackPanel x:Name="Picture" Grid.Column="1" Margin="0" >

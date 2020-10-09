@@ -67,10 +67,17 @@
     <Compile Include="Control\StaffController.cs" />
     <Compile Include="Teaching\Unit.cs" />
     <Compile Include="Control\UnitController.cs" />
+    <Page Include="View\ActivityGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Compile Include="View\ActivityGrid.xaml.cs">
+      <DependentUpon>ActivityGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
