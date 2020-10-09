@@ -77,6 +77,7 @@ namespace HRIS_KIT506.Database
                         Room = rdr.GetString(6),
                         Email = rdr.GetString(7),
                         Category = ParseEnum<Category>(rdr.GetString(8)),
+                        Image = rdr.GetString(9)
                     }) ;
                 }
             }

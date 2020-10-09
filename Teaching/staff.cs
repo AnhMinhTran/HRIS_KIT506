@@ -21,7 +21,8 @@ namespace HRIS_KIT506.Teaching
         public string Room { get; set; }
         public string Email { get; set; }
         public List<Consultation> WorkTime { get; set; }
-        public List<Class> Class { get; set; }
+        public List<Class> Class { get; set; } 
+        public string Image { get; set; }
         public bool BusyNow
         {
             get
