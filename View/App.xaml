@@ -28,5 +28,12 @@
                           MethodName="GetViewableList">
         </ObjectDataProvider>
 
+        <Style x:Key="MyLabelStyle" TargetType="Label">
+            <Setter Property="BorderBrush" Value="Black" />
+            <Setter Property="BorderThickness" Value="0.4" />
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        </Style>
+
     </Application.Resources>
 </Application>

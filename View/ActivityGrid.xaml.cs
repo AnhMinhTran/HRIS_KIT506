@@ -22,6 +22,7 @@ namespace HRIS_KIT506.View
         public ActivityGrid()
         {
             InitializeComponent();
+            this.DataContext = MainWindow.DataContextProperty;
         }
     }
 }
