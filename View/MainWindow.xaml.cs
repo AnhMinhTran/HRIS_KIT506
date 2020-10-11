@@ -1,4 +1,5 @@
 ﻿using HRIS_KIT506.Control;
+using HRIS_KIT506.Teaching;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -62,19 +63,64 @@ namespace HRIS_KIT506
         {
             if (e.AddedItems.Count > 0)
             {
-                //var code = e.AddedItems[0].ToString();
                 TabControl.SelectedIndex = 1;
 
+                /*
+                for (int i = 0; i <= unitListBox.Items.Count ; i++)
+                {
+                    if (e.AddedItems[0].ToString() == unitListBox.Items[i].ToString())
+                    {
+                        unitListBox.SelectedIndex = i;
+                        break;
+                    }
+                }
+                */
+
+                // display unit code in unit detail header
+                unitDetailHeader.DataContext = e.AddedItems[0];
+
+                // get class detail of selected unit
+                Unit selectedUnit = TeachingListBox.SelectedItem as Unit;
+                string selectedUnitCode = selectedUnit.Code;
+                UnitController.DisplayClass(selectedUnitCode);
                 
+                // update class datagrid
+                classDataGrid.ItemsSource = UnitController.ViewableClass;
 
             }
         }
+
         private void unitListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            //MessageBox.Show(e.AddedItems[0].ToString());
+
             if (e.AddedItems.Count > 0)
             {
-                unitDetailsPanel.DataContext = e.AddedItems[0];
+                // display unit code in unit detail header
+                unitDetailHeader.DataContext = e.AddedItems[0];
+
+                // get class detail of selected unit
+                Unit selectedUnit = unitListBox.SelectedItem as Unit;
+                string selectedUnitCode = selectedUnit.Code;
+                UnitController.DisplayClass(selectedUnitCode);
+
+                // update class datagrid
+                classDataGrid.ItemsSource = UnitController.ViewableClass;
             }
         }
+
+        private void Staff_Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            TabControl.SelectedIndex = 0;
+
+            TextBlock textblock = (TextBlock)sender;
+            int id = Int32.Parse(textblock.Tag.ToString());
+
+            StaffController.DisplayStaffDetail(id);
+
+            StaffDetailsPanel.DataContext = StaffController.ViewableStaffDetail;
+
+        }
+
     }
 }

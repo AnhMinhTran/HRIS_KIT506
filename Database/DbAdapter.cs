@@ -72,7 +72,8 @@ namespace HRIS_KIT506.Database
                     {
                         ID = rdr.GetInt32(0),
                         Title = rdr.GetString(1),
-                        Name = rdr.GetString(2) + ", " + rdr.GetString(3) + " (" + rdr.GetString(1) + ")",
+                        GivenName = rdr.GetString(2),
+                        FamilyName = rdr.GetString(3),
                         Campus = ParseEnum<Campus>(rdr.GetString(4)),
                         Phone = rdr.GetString(5),
                         Room = rdr.GetString(6),
@@ -80,6 +81,63 @@ namespace HRIS_KIT506.Database
                         Category = ParseEnum<Category>(rdr.GetString(8)),
                         Image = rdr.GetString(9)
                     }) ;
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("loading staff", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            return staff;
+        }
+
+        //Load specific staff in db
+        public static List<Staff> LoadStaff(int id)
+        {
+            List<Staff> staff = new List<Staff>();
+
+            MySqlConnection conn = GetConnection();
+            MySqlDataReader rdr = null;
+
+
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand
+                    (
+                    "select id, title, given_name, family_name, campus, phone, room, email, category, photo from staff where id=?id", conn
+                    );
+                cmd.Parameters.AddWithValue("id", id);
+                rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    byte[] bruh = Encoding.ASCII.GetBytes(rdr.GetString(9));
+
+                    staff.Add(new Staff
+                    {
+                        ID = rdr.GetInt32(0),
+                        Title = rdr.GetString(1),
+                        GivenName = rdr.GetString(2),
+                        FamilyName = rdr.GetString(3),
+                        Campus = ParseEnum<Campus>(rdr.GetString(4)),
+                        Phone = rdr.GetString(5),
+                        Room = rdr.GetString(6),
+                        Email = rdr.GetString(7),
+                        Category = ParseEnum<Category>(rdr.GetString(8)),
+                        Image = rdr.GetString(9)
+                    });
                 }
             }
             catch (MySqlException e)
@@ -147,9 +205,9 @@ namespace HRIS_KIT506.Database
         }
 
         //load selected staff teaching units in db
-        public static List<Class> LoadStaffClasses(int id)
+        public static List<Unit> LoadStaffUnit(int id)
         {
-            List<Class> teach = new List<Class>();
+            List<Unit> teach = new List<Unit>();
 
             MySqlConnection conn = GetConnection();
             MySqlDataReader rdr = null;
@@ -158,21 +216,23 @@ namespace HRIS_KIT506.Database
             {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("select distinct unit_code from class where staff=?id", conn);
+                MySqlCommand cmd = new MySqlCommand
+                    ("select distinct class.unit_code, unit.title from class inner join unit on class.unit_code = unit.code where class.staff=?id", conn);
                 cmd.Parameters.AddWithValue("id", id);
                 rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
                 {
-                    teach.Add(new Class
+                    teach.Add(new Unit
                     {
-                        UnitCode = rdr.GetString(0)
+                        Code = rdr.GetString(0),
+                        Title = rdr.GetString(1),
                     });
                 }
             }
             catch (MySqlException e)
             {
-                ReportError("loading classes", e);
+                ReportError("loading unit", e);
             }
             finally
             {
@@ -247,7 +307,10 @@ namespace HRIS_KIT506.Database
 
                 MySqlCommand cmd = new MySqlCommand
                     (
-                    "select day, start, end, type, room, campus, staff from class where unit_code=?code", conn
+                    "select class.day, class.start, class.end, class.type, class.room, class.campus, class.staff, " +
+                    "staff.given_name, staff.family_name, staff.title " +
+                    "from class inner join staff on class.staff = staff.id " +
+                    "where unit_code=?code", conn
                     );
                 cmd.Parameters.AddWithValue("code", code);
                 rdr = cmd.ExecuteReader();
@@ -262,7 +325,8 @@ namespace HRIS_KIT506.Database
                         Type = ParseEnum<Teaching.Type>(rdr.GetString(3)),
                         Room = rdr.GetString(4),
                         Campus = ParseEnum<Campus>(rdr.GetString(5)),
-                        StaffID = rdr.GetInt32(6)
+                        StaffID = rdr.GetInt32(6),
+                        StaffName = rdr.GetString(7) + " " + rdr.GetString(8),
                     });
                     
                 }

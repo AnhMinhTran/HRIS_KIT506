@@ -17,6 +17,7 @@ namespace HRIS_KIT506.Control
         public List<Staff> Workers { get { return Staff; } set { } }
 
         private ObservableCollection<Staff> ViewableStaff;
+        public ObservableCollection<Staff> ViewableStaffDetail;
         public ObservableCollection<Staff> VisibleWorkers { get { return ViewableStaff; } set { } }
         public StaffController()
         {
@@ -26,7 +27,7 @@ namespace HRIS_KIT506.Control
             foreach (Staff e in Staff)
             {
                 e.WorkTime = DbAdapter.LoadConsultationItems(e.ID);
-                e.Class = DbAdapter.LoadStaffClasses(e.ID);
+                e.Unit = DbAdapter.LoadStaffUnit(e.ID);
             }
         }
         public ObservableCollection<Staff> GetViewableList()
@@ -47,11 +48,23 @@ namespace HRIS_KIT506.Control
         public void Search(string search)
         {
             var name = from Staff e in Staff
-                       where search == "" || e.Name.ToLower().Contains(search.ToLower())
+                       where search == "" || e.FamilyName.ToLower().Contains(search.ToLower()) || e.GivenName.ToLower().Contains(search.ToLower())
                        select e;
 
             ViewableStaff.Clear();
             name.ToList().ForEach(ViewableStaff.Add);
+        }
+
+        public void DisplayStaffDetail(int id)
+        {
+            Staff = DbAdapter.LoadStaff(id);
+            ViewableStaffDetail = new ObservableCollection<Staff>(Staff);
+
+            foreach (Staff e in Staff)
+            {
+                e.WorkTime = DbAdapter.LoadConsultationItems(e.ID);
+                e.Unit = DbAdapter.LoadStaffUnit(e.ID);
+            }
         }
 
     }

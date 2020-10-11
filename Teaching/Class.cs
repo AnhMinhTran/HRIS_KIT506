@@ -10,6 +10,7 @@ namespace HRIS_KIT506.Teaching
     public class Class
     {
         public string UnitCode { get; set; }
+        public string Title { get; set; }
         public Campus Campus { get; set; }
         public DayOfWeek Day { get; set; }
         public TimeSpan Start { get; set; }
@@ -17,10 +18,12 @@ namespace HRIS_KIT506.Teaching
         public Type Type { get; set; }
         public string Room { get; set; }
         public int StaffID { get; set; }
+        public string StaffName { get; set; }
+
 
         public override string ToString()
         {
-            return UnitCode;
+            return UnitCode + " " + Title ;
         }
     }
 }

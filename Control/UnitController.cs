@@ -15,6 +15,8 @@ namespace HRIS_KIT506.Control
         public List<Unit> Courses { get { return Unit; } set { } }
 
         private ObservableCollection<Unit> ViewableUnit;
+
+        public ObservableCollection<Class> ViewableClass;
         public ObservableCollection<Unit> VisibleCourses { get { return ViewableUnit; } set { } }
         public UnitController()
         {
@@ -24,7 +26,7 @@ namespace HRIS_KIT506.Control
             //Part of step 2.3.2 from Week 9 tutorial
             foreach (Unit e in Unit)
             {
-                e.ClassList = DbAdapter.LoadClasses(e.Code);
+                e.Class = DbAdapter.LoadClasses(e.Code);
             }
         }
 
@@ -36,7 +38,7 @@ namespace HRIS_KIT506.Control
         public void Filter(string code)
         {
             var selected = from Unit e in Unit
-                           where e.Code.ToString() == code
+                           where code.Contains(e.Code.ToString())
                            select e;
 
             ViewableUnit.Clear();
@@ -44,6 +46,10 @@ namespace HRIS_KIT506.Control
             selected.ToList().ForEach(ViewableUnit.Add);
         }
 
+        public void DisplayClass(string unitCode)
+        {
+            ViewableClass = new ObservableCollection<Class>(DbAdapter.LoadClasses(unitCode));
+        }
 
     }
 }

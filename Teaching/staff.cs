@@ -14,14 +14,15 @@ namespace HRIS_KIT506.Teaching
     {
         public int ID { get; set; }
         public string Title { get; set; }
-        public string Name { get; set; }
+        public string FamilyName { get; set; }
+        public string GivenName { get; set; }
         public Campus Campus { get; set; }
         public Category Category { get; set; }
         public string Phone { get; set; }
         public string Room { get; set; }
         public string Email { get; set; }
         public List<Consultation> WorkTime { get; set; }
-        public List<Class> Class { get; set; }
+        public List<Unit> Unit { get; set; }
         public string Image { get; set; }
         public bool BusyNow
         {
@@ -71,7 +72,7 @@ namespace HRIS_KIT506.Teaching
         public override string ToString()
         {
             //For the purposes of this week's demonstration this returns only the name
-            return Name;
+            return FamilyName + ", " + GivenName + " (" + Title + ")";
         }
     }
 }
