@@ -12,11 +12,9 @@ namespace HRIS_KIT506.Control
 
     class StaffController
     {
-        // Staff master list for staff list view
+        // Staff master list
         private List<Staff> Staff;
 
-        // list of staff for displaying selected staff detail in staff detail view
-        private List<Staff> StaffDetail;
         public List<Staff> Workers { get { return Staff; } set { } }
 
         private ObservableCollection<Staff> ViewableStaff;
@@ -64,16 +62,14 @@ namespace HRIS_KIT506.Control
         // For displaying staff detail when user click on staff id in class timetable
         public void DisplayStaffDetail(int id)
         {
-            StaffDetail = DbAdapter.LoadStaff(id);
-            ViewableStaffDetail = new ObservableCollection<Staff>(StaffDetail);
+            ViewableStaffDetail = new ObservableCollection<Staff>(Staff);
 
-            
-            foreach (Staff e in StaffDetail)
-            {
-                e.WorkTime = DbAdapter.LoadConsultationItems(e.ID);
-                e.Unit = DbAdapter.LoadStaffUnit(e.ID);
-                e.Class = DbAdapter.LoadStaffClass(e.ID);
-            }
+            var selected = from Staff e in Staff
+                       where id == e.ID
+                       select e;
+
+            ViewableStaffDetail.Clear();
+            selected.ToList().ForEach(ViewableStaffDetail.Add);
         }
 
     }

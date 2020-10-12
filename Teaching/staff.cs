@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 namespace HRIS_KIT506.Teaching
 {
     public enum Category { Academic, Casual, Admin, Technical, All};
-    public enum Campus { Launceston, Hobart};
+    public enum Campus { Launceston, Hobart, All};
     public class Staff
     {
         public int ID { get; set; }
@@ -33,7 +33,7 @@ namespace HRIS_KIT506.Teaching
                 {
                     DateTime now = DateTime.Now;
 
-                    //hardcode DateTime for testing
+                    //hardcode DateTime for testing if needed
                     //DateTime now = new DateTime(2020, 10, 12, 13, 00, 0);
 
                     var ConsultationOverlapping = from Consultation work in WorkTime
@@ -52,7 +52,7 @@ namespace HRIS_KIT506.Teaching
                     {
                         foreach (Class work in ClassOverlapping)
                         {
-                            return "Teaching" + " " + work.UnitCode;
+                            return "Teaching" + " " + work.UnitCode + " in " + work.Room;
                         }
                     }
                 }
@@ -60,6 +60,7 @@ namespace HRIS_KIT506.Teaching
             }
         }
 
+        /*
         public double TotalWorkHours
         {
             get
@@ -70,10 +71,6 @@ namespace HRIS_KIT506.Teaching
                     total += (item.End - item.Start).TotalHours;
                 }
                 return total;
-
-                //Which can be done using LINQ
-                //return (from RosterItem item in WorkTimes
-                //        select (item.End - item.Start).TotalHours).Sum();
             }
         }
 
@@ -82,11 +79,10 @@ namespace HRIS_KIT506.Teaching
             //This is equivalent to TotalWorkHours / 4 * 100
             get { return TotalWorkHours / 0.04; }
         }
-
+        */
 
         public override string ToString()
         {
-            //For the purposes of this week's demonstration this returns only the name
             return FamilyName + ", " + GivenName + " (" + Title + ")";
         }
     }

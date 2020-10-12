@@ -11,19 +11,20 @@ namespace HRIS_KIT506.Control
 {
     class UnitController
     {
+        // Unit master list
         private List<Unit> Unit;
         public List<Unit> Courses { get { return Unit; } set { } }
 
         private ObservableCollection<Unit> ViewableUnit;
 
         public ObservableCollection<Class> ViewableClass;
+        public ObservableCollection<Class> ViewableFilteredClass;
         public ObservableCollection<Unit> VisibleCourses { get { return ViewableUnit; } set { } }
         public UnitController()
         {
             Unit = DbAdapter.LoadAllUnit();
-            ViewableUnit = new ObservableCollection<Unit>(Unit); //this list we will modify later
+            ViewableUnit = new ObservableCollection<Unit>(Unit); 
 
-            //Part of step 2.3.2 from Week 9 tutorial
             foreach (Unit e in Unit)
             {
                 e.Class = DbAdapter.LoadClasses(e.Code);
@@ -35,23 +36,31 @@ namespace HRIS_KIT506.Control
             return VisibleCourses;
         }
 
-        // For filter function in unt list view
-        public void Filter(string code)
+        // For Serach function in unit list view
+        public void Search(string search)
         {
-            var selected = from Unit e in Unit
-                           where code.Contains(e.Code.ToString())
-                           select e;
+            var unit = from Unit e in Unit
+                       where search == "" || e.Title.ToLower().Contains(search.ToLower()) || e.Code.ToLower().Contains(search.ToLower())
+                       select e;
 
             ViewableUnit.Clear();
-            //Converts the result of the LINQ expression to a List and then calls viewableStaff.Add with each element of that list in turn
-            selected.ToList().ForEach(ViewableUnit.Add);
+            unit.ToList().ForEach(ViewableUnit.Add);
         }
 
-        // For display class timetable when user click on teaching class in staff detail view
+        // For display class timetable when user click on teaching class in class timetable
         public void DisplayClass(string unitCode)
         {
             ViewableClass = new ObservableCollection<Class>(DbAdapter.LoadClasses(unitCode));
         }
 
+        // For filter function in class timetable
+        public void Filter(string campus)
+        {
+            var selected = from Class e in ViewableClass
+                           where campus == "All" || e.Campus.ToString() == campus
+                           select e;
+
+            ViewableFilteredClass = new ObservableCollection<Class>(selected);
+        }
     }
 }

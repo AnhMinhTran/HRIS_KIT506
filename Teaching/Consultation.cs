@@ -15,8 +15,6 @@ namespace HRIS_KIT506.Teaching
 
         public bool Overlaps(DateTime sometime)
         {
-            //TimeSpan objects overload the comparison operators, so we can treat them as if they were plain numbers in the checks below
-            //A longer version of the second test would be sometime.TimeOfDay.CompareTo(Start) >= 0
             return sometime.DayOfWeek == Day &&
                 sometime.TimeOfDay >= Start &&
                 sometime.TimeOfDay < End;
@@ -25,10 +23,6 @@ namespace HRIS_KIT506.Teaching
         public override string ToString()
         {
             return Day + " " + Start + "--" + End;
-
-            //This alternative uses the Format method of string, with the
-            //format hh:mm to eliminate the seconds component from the time
-            //return string.Format("{0} {1:hh':'mm}--{2:hh':'mm}", Day, Start, End);
         }
     }
 }

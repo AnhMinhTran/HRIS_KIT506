@@ -14,6 +14,12 @@
             
         </ObjectDataProvider>
         
+        <Control:UnitController x:Key="unitcontroller"/>
+        <ObjectDataProvider x:Key="UnitList"
+                            ObjectInstance="{StaticResource unitcontroller}"
+                            MethodName="GetViewableList">
+        </ObjectDataProvider>
+
         <ObjectDataProvider x:Key="CategoryValue"
                             ObjectType="{x:Type sys:Enum}"
                             MethodName="GetValues">
@@ -22,10 +28,12 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
 
-        <Control:UnitController x:Key="unitcontroller"/>
-        <ObjectDataProvider x:Key="UnitList"
-                            ObjectInstance="{StaticResource unitcontroller}"
-                            MethodName="GetViewableList">
+        <ObjectDataProvider x:Key="CampusValue"
+                            ObjectType="{x:Type sys:Enum}"
+                            MethodName="GetValues">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="Teaching:Campus"/>
+            </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
 
     </Application.Resources>

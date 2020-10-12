@@ -102,63 +102,6 @@ namespace HRIS_KIT506.Database
             return staff;
         }
 
-        //Load specific staff in db
-        public static List<Staff> LoadStaff(int id)
-        {
-            List<Staff> staff = new List<Staff>();
-
-            MySqlConnection conn = GetConnection();
-            MySqlDataReader rdr = null;
-
-
-            try
-            {
-                conn.Open();
-
-                MySqlCommand cmd = new MySqlCommand
-                    (
-                    "select id, title, given_name, family_name, campus, phone, room, email, category, photo from staff where id=?id", conn
-                    );
-                cmd.Parameters.AddWithValue("id", id);
-                rdr = cmd.ExecuteReader();
-                while (rdr.Read())
-                {
-                    byte[] bruh = Encoding.ASCII.GetBytes(rdr.GetString(9));
-
-                    staff.Add(new Staff
-                    {
-                        ID = rdr.GetInt32(0),
-                        Title = rdr.GetString(1),
-                        GivenName = rdr.GetString(2),
-                        FamilyName = rdr.GetString(3),
-                        Campus = ParseEnum<Campus>(rdr.GetString(4)),
-                        Phone = rdr.GetString(5),
-                        Room = rdr.GetString(6),
-                        Email = rdr.GetString(7),
-                        Category = ParseEnum<Category>(rdr.GetString(8)),
-                        Image = rdr.GetString(9)
-                    });
-                }
-            }
-            catch (MySqlException e)
-            {
-                ReportError("loading staff", e);
-            }
-            finally
-            {
-                if (rdr != null)
-                {
-                    rdr.Close();
-                }
-                if (conn != null)
-                {
-                    conn.Close();
-                }
-            }
-
-            return staff;
-        }
-
         //Load consultation hours in db
         public static List<Consultation> LoadConsultationItems(int id)
         {
