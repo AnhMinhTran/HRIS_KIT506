@@ -23,25 +23,40 @@ namespace HRIS_KIT506.Teaching
         public string Email { get; set; }
         public List<Consultation> WorkTime { get; set; }
         public List<Unit> Unit { get; set; }
+        public List<Class> Class { get; set; }
         public string Image { get; set; }
-        public bool BusyNow
+        public string Availability
         {
             get
             {
-                if (WorkTime != null)
+                if (WorkTime != null || Class != null)
                 {
                     DateTime now = DateTime.Now;
-                    var overlapping = from Consultation work in WorkTime
-                                      where work.Overlaps(now)
-                                      select work;
-                    return overlapping.Count() > 0;
 
-                    //which could be rewritten as a single expression:
-                    //return (from RosterItem work in WorkTimes
-                    //        where work.Overlaps(now)
-                    //        select work).Count() > 0;
+                    //hardcode DateTime for testing
+                    //DateTime now = new DateTime(2020, 10, 12, 13, 00, 0);
+
+                    var ConsultationOverlapping = from Consultation work in WorkTime
+                                                    where work.Overlaps(now)
+                                                    select work;
+
+                    var ClassOverlapping = from Class work in Class
+                                            where work.Overlaps(now)
+                                            select work;
+
+                    if (ConsultationOverlapping.Count() > 0)
+                    {
+                        return "Consulting";
+                    }
+                    else if (ClassOverlapping.Count() > 0)
+                    {
+                        foreach (Class work in ClassOverlapping)
+                        {
+                            return "Teaching" + " " + work.UnitCode;
+                        }
+                    }
                 }
-                return false;
+                return "Free";
             }
         }
 

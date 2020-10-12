@@ -35,11 +35,11 @@
                     <StackPanel x:Name="StaffDetailsPanel" Orientation="Vertical" Margin="2.2,0,0,0" HorizontalAlignment="Left" Width="415" Grid.Column="1">
                         <Grid Margin="0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" MinWidth="265.6"/>
+                                <ColumnDefinition Width="Auto" MinWidth="231.2"/>
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
-                            <StackPanel Grid.Column="0" Margin="0,0,10.6,-0.2" >
+                            <StackPanel Grid.Column="0" Margin="0,0,10.2,-0.2" >
                                 <StackPanel Orientation="Horizontal" Margin="0,10,10,0">
                                     <Label Content="ID:"></Label>
                                     <Label Content="{Binding Path=ID }"></Label>
@@ -74,11 +74,14 @@
                                 </StackPanel>
                             </StackPanel>
 
-                            <StackPanel x:Name="Picture" Grid.Column="1" Margin="0" >
-                                <Image Source="{Binding Path=Image}" Margin="5"></Image>
+                            <StackPanel x:Name="Picture" Grid.Column="1" Margin="17.8,0,0.2,-0.2" >
+                                <Image Source="{Binding Path=Image}" Margin="5,5,4.6,5" Height="149"></Image>
+                                <StackPanel Orientation="Horizontal" Margin="0">
+                                    <Label Content="Availibility:"/>
+                                    <Label Content="{Binding Path=Availability}"></Label>
+                                </StackPanel>
                             </StackPanel>
                         </Grid>
-
                         <Label Content="Consultation hours:" Margin="0,10,10,0"></Label>
                         <ListBox Height="95" ItemsSource="{Binding Path=WorkTime}" 
                                      Margin="0,0,10,0"/>
@@ -102,15 +105,18 @@
                         <RowDefinition Height="199*"/>
                     </Grid.RowDefinitions>
                     <StackPanel Grid.Row="0" Margin="10,10,10,9">
-                        <ListBox x:Name="unitListBox"  Margin="10,20,10,5" SelectionChanged="unitListBox_SelectionChanged"
+                        <StackPanel Orientation="Horizontal" Margin="10,0" HorizontalAlignment="Center">
+                            <Label Content="Unit List" Margin="0" FontWeight="Bold"/>
+                        </StackPanel>
+                        <ListBox x:Name="unitListBox"  Margin="10,0,10,5" SelectionChanged="unitListBox_SelectionChanged"
 			            ItemsSource="{Binding Source={StaticResource UnitList}}" Height="241"/>
                     </StackPanel>
                     <StackPanel x:Name="unitDetailsPanel" Orientation="Vertical" Grid.Row="1" Margin="10,6,10,0.2">
-                        <StackPanel x:Name="unitDetailHeader" Orientation="Horizontal" HorizontalAlignment="Center" Margin="10,0" Width="636">
-                            <Label Content="{Binding Code}" Margin="200,0,0,0" />
-                            <Label Content="Class Timetable" Margin="0" HorizontalAlignment="Center"/>
+                        <StackPanel x:Name="unitDetailHeader" Orientation="Horizontal" Margin="10,0" HorizontalAlignment="Center">
+                            <Label Content="{Binding Code}" Margin="0" FontWeight="Bold" />
+                            <Label Content="Class Timetable" Margin="0" FontWeight="Bold"/>
                         </StackPanel>
-                        <DataGrid x:Name="classDataGrid" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding Class}" Margin="10,0" Height="148">
+                        <DataGrid x:Name="classDataGrid" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding Class}" Margin="10,0" Height="156">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Day" Binding="{Binding Day}" MinWidth="50" />
                                 <DataGridTextColumn Header="Start Time" Binding="{Binding Start}" MinWidth="50"  />

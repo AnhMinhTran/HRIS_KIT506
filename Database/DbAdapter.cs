@@ -326,7 +326,7 @@ namespace HRIS_KIT506.Database
                         Room = rdr.GetString(4),
                         Campus = ParseEnum<Campus>(rdr.GetString(5)),
                         StaffID = rdr.GetInt32(6),
-                        StaffName = rdr.GetString(7) + " " + rdr.GetString(8),
+                        StaffName = rdr.GetString(9) + " " + rdr.GetString(7) + " " + rdr.GetString(8),
                     });
                     
                 }
@@ -350,6 +350,63 @@ namespace HRIS_KIT506.Database
             return course;
         }
 
+        //load staff teaching classes
+        public static List<Class> LoadStaffClass(int id)
+        {
+            List<Class> course = new List<Class>();
+
+            MySqlConnection conn = GetConnection();
+            MySqlDataReader rdr = null;
+
+            try
+            {
+                conn.Open();
+
+                MySqlCommand cmd = new MySqlCommand
+                    (
+                    "select class.unit_code, class.day, class.start, class.end, class.type, class.room, class.campus, class.staff, " +
+                    "staff.given_name, staff.family_name, staff.title " +
+                    "from class inner join staff on class.staff = staff.id " +
+                    "where staff=?id", conn
+                    );
+                cmd.Parameters.AddWithValue("id", id);
+                rdr = cmd.ExecuteReader();
+
+                while (rdr.Read())
+                {
+                    course.Add(new Class
+                    {
+                        UnitCode = rdr.GetString(0),
+                        Day = ParseEnum<DayOfWeek>(rdr.GetString(1)),
+                        Start = rdr.GetTimeSpan(2),
+                        End = rdr.GetTimeSpan(3),
+                        Type = ParseEnum<Teaching.Type>(rdr.GetString(4)),
+                        Room = rdr.GetString(5),
+                        Campus = ParseEnum<Campus>(rdr.GetString(6)),
+                        StaffID = rdr.GetInt32(7),
+                        StaffName = rdr.GetString(10) + " " + rdr.GetString(8) + " " + rdr.GetString(9),
+                    });
+
+                }
+            }
+            catch (MySqlException e)
+            {
+                ReportError("loading classes", e);
+            }
+            finally
+            {
+                if (rdr != null)
+                {
+                    rdr.Close();
+                }
+                if (conn != null)
+                {
+                    conn.Close();
+                }
+            }
+
+            return course;
+        }
 
         /// <summary>
         /// In a more complete application this error would be logged to a file

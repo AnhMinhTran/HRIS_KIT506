@@ -35,6 +35,7 @@ namespace HRIS_KIT506.Control
             return VisibleCourses;
         }
 
+        // For filter function in unt list view
         public void Filter(string code)
         {
             var selected = from Unit e in Unit
@@ -46,6 +47,7 @@ namespace HRIS_KIT506.Control
             selected.ToList().ForEach(ViewableUnit.Add);
         }
 
+        // For display class timetable when user click on teaching class in staff detail view
         public void DisplayClass(string unitCode)
         {
             ViewableClass = new ObservableCollection<Class>(DbAdapter.LoadClasses(unitCode));

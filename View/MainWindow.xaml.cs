@@ -56,6 +56,7 @@ namespace HRIS_KIT506
             {
                 var selected = e.AddedItems[0].ToString();
                 StaffController.Filter(selected);
+
             }
         }
 
@@ -64,17 +65,6 @@ namespace HRIS_KIT506
             if (e.AddedItems.Count > 0)
             {
                 TabControl.SelectedIndex = 1;
-
-                /*
-                for (int i = 0; i <= unitListBox.Items.Count ; i++)
-                {
-                    if (e.AddedItems[0].ToString() == unitListBox.Items[i].ToString())
-                    {
-                        unitListBox.SelectedIndex = i;
-                        break;
-                    }
-                }
-                */
 
                 // display unit code in unit detail header
                 unitDetailHeader.DataContext = e.AddedItems[0];
@@ -92,7 +82,6 @@ namespace HRIS_KIT506
 
         private void unitListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //MessageBox.Show(e.AddedItems[0].ToString());
 
             if (e.AddedItems.Count > 0)
             {

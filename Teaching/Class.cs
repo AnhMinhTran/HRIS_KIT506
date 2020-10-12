@@ -20,6 +20,12 @@ namespace HRIS_KIT506.Teaching
         public int StaffID { get; set; }
         public string StaffName { get; set; }
 
+        public bool Overlaps(DateTime sometime)
+        {
+            return sometime.DayOfWeek == Day &&
+                sometime.TimeOfDay >= Start &&
+                sometime.TimeOfDay < End;
+        }
 
         public override string ToString()
         {
