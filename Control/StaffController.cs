@@ -30,6 +30,7 @@ namespace HRIS_KIT506.Control
                 e.WorkTime = DbAdapter.LoadConsultationItems(e.ID);
                 e.Unit = DbAdapter.LoadStaffUnit(e.ID);
                 e.Class = DbAdapter.LoadStaffClass(e.ID);
+                e.ActivityGrid = ActivityGridGenerate();
             }
         }
         public ObservableCollection<Staff> GetViewableList()
@@ -72,5 +73,11 @@ namespace HRIS_KIT506.Control
             selected.ToList().ForEach(ViewableStaffDetail.Add);
         }
 
+        public static List<ActivityGrid> ActivityGridGenerate()
+        {
+            List<ActivityGrid> Rowdata = new List<ActivityGrid>();
+            Rowdata.Add(new ActivityGrid { Time = "9", Mon = 1, Tue = 0, Wed = 1, Thu = 1, Fri = 1 });
+            return Rowdata;
+        }
     }
 }

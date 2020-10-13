@@ -61,6 +61,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Teaching\Class.cs" />
+    <Compile Include="Teaching\ActivityGrid.cs" />
     <Compile Include="Teaching\Consultation.cs" />
     <Compile Include="Database\DbAdapter.cs" />
     <Compile Include="Teaching\staff.cs" />

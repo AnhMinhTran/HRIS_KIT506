@@ -47,7 +47,7 @@ namespace HRIS_KIT506.Control
             unit.ToList().ForEach(ViewableUnit.Add);
         }
 
-        // For display class timetable when user click on teaching class in class timetable
+        // For display class timetable when user click on teaching class in staff detail
         public void DisplayClass(string unitCode)
         {
             ViewableClass = new ObservableCollection<Class>(DbAdapter.LoadClasses(unitCode));

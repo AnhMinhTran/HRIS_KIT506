@@ -37,12 +37,12 @@ namespace HRIS_KIT506.Teaching
                     //DateTime now = new DateTime(2020, 10, 12, 13, 00, 0);
 
                     var ConsultationOverlapping = from Consultation work in WorkTime
-                                                    where work.Overlaps(now)
-                                                    select work;
+                                                  where work.Overlaps(now)
+                                                  select work;
 
                     var ClassOverlapping = from Class work in Class
-                                            where work.Overlaps(now)
-                                            select work;
+                                           where work.Overlaps(now)
+                                           select work;
 
                     if (ConsultationOverlapping.Count() > 0)
                     {
@@ -59,6 +59,7 @@ namespace HRIS_KIT506.Teaching
                 return "Free";
             }
         }
+        public List<ActivityGrid> ActivityGrid{ get; set;}
 
         /*
         public double TotalWorkHours
