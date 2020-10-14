@@ -25,7 +25,7 @@ namespace HRIS_KIT506.Control
 
             foreach (Staff e in Staff)
             {
-                e.WorkTime = DbAdapter.LoadConsultationItems(e.ID);
+                e.Consultations = DbAdapter.LoadConsultationItems(e.ID);
                 e.Class = DbAdapter.LoadStaffClasses(e.ID);
             }
         }
@@ -46,6 +46,7 @@ namespace HRIS_KIT506.Control
 
         public void Search(string search)
         {
+            // Using LINQ to search for staff
             var name = from Staff e in Staff
                        where search == "" || e.Name.ToLower().Contains(search.ToLower())
                        select e;

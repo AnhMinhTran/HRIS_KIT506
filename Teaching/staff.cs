@@ -20,17 +20,17 @@ namespace HRIS_KIT506.Teaching
         public string Phone { get; set; }
         public string Room { get; set; }
         public string Email { get; set; }
-        public List<Consultation> WorkTime { get; set; }
+        public List<Consultation> Consultations { get; set; }
         public List<Class> Class { get; set; }
         public string Image { get; set; }
         public bool BusyNow
         {
             get
             {
-                if (WorkTime != null)
+                if (Consultations != null)
                 {
                     DateTime now = DateTime.Now;
-                    var overlapping = from Consultation work in WorkTime
+                    var overlapping = from Consultation work in Consultations
                                       where work.Overlaps(now)
                                       select work;
                     return overlapping.Count() > 0;
@@ -43,30 +43,6 @@ namespace HRIS_KIT506.Teaching
                 return false;
             }
         }
-
-        public double TotalWorkHours
-        {
-            get
-            {
-                double total = 0;
-                foreach (Consultation item in WorkTime)
-                {
-                    total += (item.End - item.Start).TotalHours;
-                }
-                return total;
-
-                //Which can be done using LINQ
-                //return (from RosterItem item in WorkTimes
-                //        select (item.End - item.Start).TotalHours).Sum();
-            }
-        }
-
-        public double Workload
-        {
-            //This is equivalent to TotalWorkHours / 4 * 100
-            get { return TotalWorkHours / 0.04; }
-        }
-
 
         public override string ToString()
         {

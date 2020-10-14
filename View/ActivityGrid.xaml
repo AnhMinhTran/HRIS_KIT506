@@ -29,7 +29,6 @@
             <RowDefinition Height="1*"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-        <TextBlock>Second Window</TextBlock>
         <Label x:Name="Monday" Grid.Column="1" Style="{StaticResource MyLabelStyle}" Grid.Row="0" Content="Monday" />
         <Label x:Name="Tuesday" Grid.Column="2" Style="{StaticResource MyLabelStyle}" Grid.Row="0" Content="Tuesday" />
         <Label x:Name="Wed" Grid.Column="3" Style="{StaticResource MyLabelStyle}" Grid.Row="0" Content="Wednesday" />
@@ -45,6 +44,6 @@
         <Label x:Name="L15" Grid.Column="0" Style="{StaticResource MyLabelStyle}"  Grid.Row="7" Content="15:00" />
         <Label x:Name="L16" Grid.Column="0" Style="{StaticResource MyLabelStyle}"  Grid.Row="8" Content="16:00" />
         <Label x:Name="L17" Grid.Column="0" Style="{StaticResource MyLabelStyle}"  Grid.Row="9" Content="17:00" />
-        
+        <Label x:Name="ID" Content="{Binding Path= ID}"/>
     </Grid>
 </Window>

@@ -81,8 +81,8 @@ namespace HRIS_KIT506
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             ActivityGrid activityGridWindows = new ActivityGrid();
+            activityGridWindows.DataContext = this.DataContext;
             activityGridWindows.Show();
-
         }
     }
 }
