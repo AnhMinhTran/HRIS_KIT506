@@ -19,6 +19,8 @@
                             ObjectInstance="{StaticResource unitcontroller}"
                             MethodName="GetViewableList">
         </ObjectDataProvider>
+        
+        
 
         <ObjectDataProvider x:Key="CategoryValue"
                             ObjectType="{x:Type sys:Enum}"

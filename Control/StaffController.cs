@@ -30,7 +30,7 @@ namespace HRIS_KIT506.Control
                 e.WorkTime = DbAdapter.LoadConsultationItems(e.ID);
                 e.Unit = DbAdapter.LoadStaffUnit(e.ID);
                 e.Class = DbAdapter.LoadStaffClass(e.ID);
-                e.ActivityGrid = ActivityGridGenerate();
+                e.ActivityGrid = ActivityGridGenerate(e.WorkTime);
             }
         }
         public ObservableCollection<Staff> GetViewableList()
@@ -73,10 +73,43 @@ namespace HRIS_KIT506.Control
             selected.ToList().ForEach(ViewableStaffDetail.Add);
         }
 
-        public static List<ActivityGrid> ActivityGridGenerate()
+        // For loading rowdata in the staff activity grid
+        public List<ActivityGrid> ActivityGridGenerate(List<Consultation> consultations)
         {
             List<ActivityGrid> Rowdata = new List<ActivityGrid>();
-            Rowdata.Add(new ActivityGrid { Time = "9", Mon = 1, Tue = 0, Wed = 1, Thu = 1, Fri = 1 });
+
+            DateTime datetime = new DateTime(2020, 10, 12, 9, 00, 0);
+
+
+            var ConsultationOverlapping = from Consultation work in consultations
+                                          where work.Overlaps(datetime)
+                                          select work;
+
+            String[] day = { "white", "white", "white", "white", "white", "white" };
+
+
+            for (int hour = 9; hour < 18; hour++)
+            {
+                for (int Day = 1; Day < 6; Day++)
+                {
+                    if (ConsultationOverlapping.Count() > 0)
+                        day[Day] = "green";
+                    datetime = datetime.AddDays(1);
+                }
+
+                Rowdata.Add(new ActivityGrid 
+                { 
+                    Time = hour.ToString() + " - " + (hour+1).ToString(), Mon = day[1], Tue = day[2], Wed = day[3], Thu = day[4], Fri = day[5] 
+                });
+                day[1] = "white";
+                day[2] = "white";
+                day[3] = "white";
+                day[4] = "white";
+                day[5] = "white";
+                datetime = datetime.AddDays(-5);
+                datetime = datetime.AddHours(1);
+                }
+
             return Rowdata;
         }
     }
