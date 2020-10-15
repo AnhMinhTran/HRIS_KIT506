@@ -25,15 +25,17 @@ namespace HRIS_KIT506.Teaching
         public List<Unit> Unit { get; set; }
         public List<Class> Class { get; set; }
         public string Image { get; set; }
+        public List<ActivityGrid> ActivityGrid { get; set; }
         public string Availability
         {
             get
             {
                 if (WorkTime != null || Class != null)
                 {
+                    // replace this datetime with the hardcode datetime when testing
                     DateTime now = DateTime.Now;
 
-                    //hardcode DateTime for testing if needed
+                    //Below is a hardcode DateTime for testing availbity function if needed
                     //DateTime now = new DateTime(2020, 10, 12, 13, 00, 0);
 
                     var ConsultationOverlapping = from Consultation work in WorkTime
@@ -59,28 +61,6 @@ namespace HRIS_KIT506.Teaching
                 return "Free";
             }
         }
-        public List<ActivityGrid> ActivityGrid{ get; set;}
-
-        /*
-        public double TotalWorkHours
-        {
-            get
-            {
-                double total = 0;
-                foreach (Consultation item in WorkTime)
-                {
-                    total += (item.End - item.Start).TotalHours;
-                }
-                return total;
-            }
-        }
-
-        public double Workload
-        {
-            //This is equivalent to TotalWorkHours / 4 * 100
-            get { return TotalWorkHours / 0.04; }
-        }
-        */
 
         public override string ToString()
         {

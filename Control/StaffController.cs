@@ -45,6 +45,7 @@ namespace HRIS_KIT506.Control
                            where category == "All" || e.Category.ToString() == category
                            select e;
             ViewableStaff.Clear();
+
             //Converts the result of the LINQ expression to a List and then calls viewableStaff.Add with each element of that list in turn
             selected.ToList().ForEach(ViewableStaff.Add);
         }
@@ -78,8 +79,11 @@ namespace HRIS_KIT506.Control
         {
             List<ActivityGrid> Rowdata = new List<ActivityGrid>();
 
+            // The datetime must be a Monday at 09:00 am
+            // there should be a better way to define the datetime instead of a specific date
             DateTime datetime = new DateTime(2020, 10, 12, 9, 00, 0);
 
+            // LINQ to select the overlaps of class and consultation with a specific datetime
             var ConsultationOverlapping = from Consultation work in consultations
                                           where work.Overlaps(datetime)
                                           select work;
@@ -88,11 +92,12 @@ namespace HRIS_KIT506.Control
                                    where work.Overlaps(datetime)
                                    select work;
 
-            String[] day = { "white", "white", "white", "white", "white", "white" };
+            String[] day = { "white", "white", "white", "white", "white" };
 
+            // a for loop to set color in each row in the activity grid
             for (int hour = 9; hour < 18; hour++)
             {
-                for (int Day = 1; Day < 6; Day++)
+                for (int Day = 0; Day < 5; Day++)
                 {
                     if (ConsultationOverlapping.Count() > 0)
                     {
@@ -107,13 +112,14 @@ namespace HRIS_KIT506.Control
 
                 Rowdata.Add(new ActivityGrid 
                 { 
-                    Time = hour.ToString() + " - " + (hour+1).ToString(), Mon = day[1], Tue = day[2], Wed = day[3], Thu = day[4], Fri = day[5] 
+                    Time = hour.ToString() + " - " + (hour+1).ToString(), Mon = day[0], Tue = day[1], Wed = day[2], Thu = day[3], Fri = day[4] 
                 });
-                day[1] = "white";
-                day[2] = "white";
-                day[3] = "white";
-                day[4] = "white";
-                day[5] = "white";
+
+                for (int i = 0; i < 5; i++)
+                {
+                    day[i] = "white";
+                }
+
                 datetime = datetime.AddDays(-5);
                 datetime = datetime.AddHours(1);
                 }

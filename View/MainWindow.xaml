@@ -6,7 +6,10 @@
         xmlns:local="clr-namespace:HRIS_KIT506"
         mc:Ignorable="d"
         Title="MainWindow" Height="753.06" Width="716.4">
+
     <TabControl x:Name="TabControl" Grid.ColumnSpan="2" Margin="10,10,10.4,10">
+
+        <!-- Staff Tab-->
         <TabItem Header="Staff" Margin="0">
             <WrapPanel Margin="0">
                 <Grid Width="676" Height="660">
@@ -14,19 +17,26 @@
                         <ColumnDefinition Width="248.8"/>
                         <ColumnDefinition Width="Auto" MinWidth="448.8"/>
                     </Grid.ColumnDefinitions>
+
                     <StackPanel Margin="0,10,0,0" Grid.Column="0" >
+
+                        <!-- Search Staff by name input Box -->
                         <StackPanel Orientation="Horizontal" Margin="0,10,10,0">
                             <Label Content="Search by name:" Margin="0" VerticalAlignment="Center"/>
                             <TextBox x:Name="NameSearch" Margin="0" 
                              TextWrapping="Wrap"
                              KeyUp="NameSearch_KeyUp" Width="128"/>
                         </StackPanel>
+
+                        <!-- Staff filter dropdown menu -->
                         <StackPanel Orientation="Horizontal" Margin="0,10,10,0">
                             <Label Content="Show:" Margin="0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                             <ComboBox x:Name="StaffComboBox" Margin="5,0,0,0" 
                             ItemsSource="{Binding Source={StaticResource CategoryValue}}" 
                             SelectionChanged="StaffComboBox_SelectionChanged" Width="181"/>
                         </StackPanel>
+
+                        <!-- Staff master list -->
                         <ListBox x:Name="StaffListBox" Margin="10,10,9.8,5" 
 			                    ItemsSource="{Binding Source={StaticResource StaffList}}"
                                 SelectionChanged="StaffListBox_SelectionChanged" Height="551"/>
@@ -39,11 +49,16 @@
                                 <ColumnDefinition/>
                             </Grid.ColumnDefinitions>
 
+                            <!-- Staff Detail Panel column 0-->
                             <StackPanel Grid.Column="0" Margin="0,0,11.6,-0.2" >
+
+                                <!-- Staff ID -->
                                 <StackPanel Orientation="Horizontal" Margin="0,10,10,0">
                                     <Label Content="ID:"></Label>
                                     <Label Content="{Binding Path=ID }"></Label>
                                 </StackPanel>
+
+                                <!-- Staff Name -->
                                 <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
                                     <Label Content="Name:"></Label>
                                     <TextBlock Text="{Binding Path=Title}" VerticalAlignment="Center"></TextBlock>
@@ -52,44 +67,63 @@
                                     <TextBlock Text=" "></TextBlock>
                                     <TextBlock Text="{Binding Path=FamilyName}" VerticalAlignment="Center"></TextBlock>
                                 </StackPanel>
+
+                                <!-- Staff Campus -->
                                 <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
                                     <Label Content="Campus:"></Label>
                                     <Label Content="{Binding Path=Campus}"></Label>
                                 </StackPanel>
+
+                                <!-- Staff Phone -->
                                 <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
                                     <Label Content="Phone:"></Label>
                                     <Label Content="{Binding Path=Phone}"></Label>
                                 </StackPanel>
+
+                                <!-- Staff Room -->
                                 <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
                                     <Label Content="Room:"></Label>
                                     <Label Content="{Binding Path=Room}"></Label>
                                 </StackPanel>
+
+                                <!-- Staff Email -->
                                 <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
                                     <Label Content="Email:"></Label>
                                     <Label Content="{Binding Path=Email}"></Label>
                                 </StackPanel>
+
+                                <!-- Staff Category -->
                                 <StackPanel Orientation="Horizontal" Margin="0,0,10,0">
                                     <Label Content="Category:"></Label>
                                     <Label Content="{Binding Path=Category}"></Label>
                                 </StackPanel>
                             </StackPanel>
 
+                            <!-- Staff Detail Panel column 1-->
                             <StackPanel x:Name="Picture" Grid.Column="1" Margin="16.4,0,-0.2,-0.2" >
+
+                                <!-- Staff Image -->
                                 <Image Source="{Binding Path=Image}" Margin="0,5" Height="130" Width="130" HorizontalAlignment="Left"/>
+
+                                <!-- Staff Availibility -->
                                 <Label Content="Availibility:" HorizontalAlignment="Left"/>
                                 <Label x:Name="Availibility" Content="{Binding Path=Availability}" HorizontalAlignment="Left" Foreground="#FF0031FF" ></Label>
                             </StackPanel>
                         </Grid>
+
+                        <!-- Staff Consultation hours list -->
                         <Label Content="Consultation hours:" Margin="0,10,10,0"></Label>
                         <ListBox Height="60" ItemsSource="{Binding Path=WorkTime}" 
                                      Margin="0,0,10,0"/>
 
+                        <!-- Staff teaching classes list -->
                         <Label Content="Teaching this semester:" Margin="0,0,10,0"></Label>
-
                         <ListBox x:Name="TeachingListBox" Height="80" 
                                  SelectionChanged="TeachingListBox_SelectionChanged"
                                  ItemsSource="{Binding Path=Unit}" Margin="0,0,9.8,0"
                                  />
+
+                        <!-- Staff Activity Grid Header -->
                         <StackPanel Orientation="Horizontal" Margin="0,10,10,0">
                             <Label Content="Activity Grid:" Margin="0,0,10,0" HorizontalAlignment="Left"/>
                             <Label  Margin="150,0,0,0" HorizontalAlignment="Left" Background="Blue" Height="10"/>
@@ -98,10 +132,10 @@
                             <Label Content="Consultation" Margin="0,0,10,0" HorizontalAlignment="Left"/>
                         </StackPanel>
 
+                        <!-- Staff Activity Grid -->
                         <DataGrid x:Name="tblMap" ItemsSource="{Binding ActivityGrid}" AutoGenerateColumns="False" IsReadOnly="True" CanUserReorderColumns="False" Margin="0,0,10,0" HorizontalAlignment="Left">
                             <DataGrid.Columns>
-                                <!-- There are also ways to define row labels and have them bind to a property (such as the time of day)
-             This would be neater visually, but is not shown here. -->
+
                                 <DataGridTextColumn Binding="{Binding Time}" Width="55" />
 
                                 <DataGridTextColumn Header="Monday" Width="70" >
@@ -144,8 +178,6 @@
                                     </DataGridTextColumn.ElementStyle>
                                 </DataGridTextColumn>
                             </DataGrid.Columns>
-
-                            <!-- And three more like that... -->
                         </DataGrid>
 
                     </StackPanel>
@@ -153,18 +185,21 @@
             </WrapPanel>
         </TabItem>
 
+        <!-- Unit Tab-->
         <TabItem Header="Units">
             <WrapPanel Margin="0,0,0,10" >
-                <Grid Margin="0" Width="676" Height="491">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="5*"/>
-                        <ColumnDefinition Width="333*"/>
-                    </Grid.ColumnDefinitions>
+                <Grid Margin="0" Width="683">
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="238*"/>
-                        <RowDefinition Height="253*"/>
+                        <RowDefinition Height="255*"/>
+                        <RowDefinition Height="8*"/>
+                        <RowDefinition Height="223*"/>
+                        <RowDefinition Height="5*"/>
                     </Grid.RowDefinitions>
-                    <StackPanel Grid.Row="0" Margin="0.6,10,10,9.4" Grid.Column="1">
+
+                    <!-- Unit View Row 0-->
+                    <StackPanel Grid.Row="0" Margin="0,10,10,10.2">
+
+                        <!-- Unit List Search input box-->
                         <StackPanel Orientation="Horizontal" Margin="10,0,10,5" HorizontalAlignment="Right">
                             <Label Content="Unit List" Margin="0" FontWeight="Bold" HorizontalAlignment="Left" FontSize="13"/>
                             <Label Content="Search by unit code/name:" Margin="30,0,0,0" HorizontalAlignment="Right" />
@@ -172,18 +207,28 @@
                              TextWrapping="Wrap"
                              KeyUp="UnitSearch_KeyUp" Width="128" HorizontalAlignment="Right" />
                         </StackPanel>
-                        <ListBox x:Name="unitListBox"  Margin="10,0,10.2,5" SelectionChanged="unitListBox_SelectionChanged"
-			            ItemsSource="{Binding Source={StaticResource UnitList}}" Height="176"/>
+
+                        <!-- Unit master list-->
+                        <ListBox x:Name="unitListBox"  Margin="10,0,9.6,10" SelectionChanged="unitListBox_SelectionChanged"
+			            ItemsSource="{Binding Source={StaticResource UnitList}}" Height="278"/>
                     </StackPanel>
-                    <StackPanel x:Name="unitDetailsPanel" Orientation="Vertical" Grid.Row="1" Margin="0.6,8.6,10,0.2" Grid.Column="1">
+
+                    <!-- Unit View Row 1-->
+                    <StackPanel x:Name="unitDetailsPanel" Orientation="Vertical" Grid.Row="2" Margin="1,0.7,10,0.2" Grid.RowSpan="2">
+
+                        <!-- Class Timetable Header-->
                         <StackPanel x:Name="unitDetailHeader" Orientation="Horizontal" Margin="10,0,10,5" HorizontalAlignment="Right">
                             <Label Content="{Binding Code}" Margin="0" FontWeight="Bold" Foreground="#FF0043FF" FontSize="13" />
                             <Label Content="Class Timetable" Margin="0" FontWeight="Bold" FontSize="13"/>
                             <Label Content="Filter by campus:" Margin="30,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+                            <!-- Class Timetable filter drop down menu-->
                             <ComboBox x:Name="ClassComboBox" Margin="5,0,0,0" 
                             ItemsSource="{Binding Source={StaticResource CampusValue}}" 
                             SelectionChanged="ClassComboBox_SelectionChanged" Width="140"/>
                         </StackPanel>
+
+                        <!-- Class Timetable -->
                         <DataGrid x:Name="classDataGrid" IsReadOnly="True" AutoGenerateColumns="False" ItemsSource="{Binding Class}" Margin="10,0,10.2,10" Height="205">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header="Day" Binding="{Binding Day}" MinWidth="80"  />
@@ -207,6 +252,5 @@
                 </Grid>
             </WrapPanel>
         </TabItem>
-
     </TabControl>
 </Window>

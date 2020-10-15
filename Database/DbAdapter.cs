@@ -31,9 +31,6 @@ namespace HRIS_KIT506.Database
             return (T)Enum.Parse(typeof(T), value);
         }
 
-        /// <summary>
-        /// Creates and returns (but does not open) the connection to the database.
-        /// </summary>
         private static MySqlConnection GetConnection()
         {
             if (conn == null)
@@ -45,7 +42,6 @@ namespace HRIS_KIT506.Database
             return conn;
         }
 
-
         //Load all staff in db
         public static List<Staff> LoadAllStaff()
         {
@@ -53,7 +49,6 @@ namespace HRIS_KIT506.Database
 
             MySqlConnection conn = GetConnection();
             MySqlDataReader rdr = null;
-
 
             try
             {
@@ -351,12 +346,6 @@ namespace HRIS_KIT506.Database
             return course;
         }
 
-        /// <summary>
-        /// In a more complete application this error would be logged to a file
-        /// and the error reported back to the original caller, who is closer
-        /// to the GUI and hence better able to produce the error message box
-        /// (which would not show the actual error details like this does).
-        /// </summary>
         private static void ReportError(string msg, Exception e)
         {
             if (ReportingErrors)
