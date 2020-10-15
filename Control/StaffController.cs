@@ -30,7 +30,7 @@ namespace HRIS_KIT506.Control
                 e.WorkTime = DbAdapter.LoadConsultationItems(e.ID);
                 e.Unit = DbAdapter.LoadStaffUnit(e.ID);
                 e.Class = DbAdapter.LoadStaffClass(e.ID);
-                e.ActivityGrid = ActivityGridGenerate(e.WorkTime);
+                e.ActivityGrid = ActivityGridGenerate(e.WorkTime, e.Class);
             }
         }
         public ObservableCollection<Staff> GetViewableList()
@@ -74,26 +74,34 @@ namespace HRIS_KIT506.Control
         }
 
         // For loading rowdata in the staff activity grid
-        public List<ActivityGrid> ActivityGridGenerate(List<Consultation> consultations)
+        public List<ActivityGrid> ActivityGridGenerate(List<Consultation> consultations, List<Class> classes)
         {
             List<ActivityGrid> Rowdata = new List<ActivityGrid>();
 
             DateTime datetime = new DateTime(2020, 10, 12, 9, 00, 0);
 
-
             var ConsultationOverlapping = from Consultation work in consultations
                                           where work.Overlaps(datetime)
                                           select work;
 
-            String[] day = { "white", "white", "white", "white", "white", "white" };
+            var ClassOverlapping = from Class work in classes
+                                   where work.Overlaps(datetime)
+                                   select work;
 
+            String[] day = { "white", "white", "white", "white", "white", "white" };
 
             for (int hour = 9; hour < 18; hour++)
             {
                 for (int Day = 1; Day < 6; Day++)
                 {
                     if (ConsultationOverlapping.Count() > 0)
+                    {
                         day[Day] = "green";
+                    }
+                    else if (ClassOverlapping.Count() > 0)
+                    { 
+                        day[Day] = "blue";
+                    }
                     datetime = datetime.AddDays(1);
                 }
 

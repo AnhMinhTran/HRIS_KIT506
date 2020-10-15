@@ -56,11 +56,11 @@ namespace HRIS_KIT506.Control
         // For filter function in class timetable
         public void Filter(string campus)
         {
-            var selected = from Class e in ViewableClass
-                           where campus == "All" || e.Campus.ToString() == campus
-                           select e;
+                var selected = from Class e in ViewableClass
+                               where campus == "All" || e.Campus.ToString() == campus
+                               select e;
 
-            ViewableFilteredClass = new ObservableCollection<Class>(selected);
+                ViewableFilteredClass = new ObservableCollection<Class>(selected);
         }
     }
 }

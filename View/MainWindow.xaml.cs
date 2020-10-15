@@ -122,14 +122,16 @@ namespace HRIS_KIT506
         // fucntion for filtering class by campus in class timetable
         private void ClassComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-  
-            if (e.AddedItems.Count > 0)
+            if (classDataGrid.Items.Count > 0)
             {
-                var selected = e.AddedItems[0].ToString();
-                UnitController.Filter(selected);
+                if (e.AddedItems.Count > 0)
+                {
+                    var selected = e.AddedItems[0].ToString();
+                    UnitController.Filter(selected);
 
-                // update timetable
-                classDataGrid.ItemsSource = UnitController.ViewableFilteredClass;
+                    // update timetable
+                    classDataGrid.ItemsSource = UnitController.ViewableFilteredClass;
+                }
             }
         }
 

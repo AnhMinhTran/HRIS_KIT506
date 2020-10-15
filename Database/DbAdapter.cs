@@ -61,7 +61,7 @@ namespace HRIS_KIT506.Database
 
                 MySqlCommand cmd = new MySqlCommand
                     (
-                    "select id, title, given_name, family_name, campus, phone, room, email, category, photo from staff", conn
+                    "select id, title, given_name, family_name, campus, phone, room, email, category, photo from staff order by family_name ", conn
                     );
                 rdr = cmd.ExecuteReader();
                 while (rdr.Read())
@@ -204,7 +204,7 @@ namespace HRIS_KIT506.Database
             {
                 conn.Open();
 
-                MySqlCommand cmd = new MySqlCommand("select code, title, coordinator from unit", conn);
+                MySqlCommand cmd = new MySqlCommand("select code, title, coordinator from unit order by code", conn);
                 rdr = cmd.ExecuteReader();
 
                 while (rdr.Read())
